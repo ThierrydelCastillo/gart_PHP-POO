@@ -1,13 +1,13 @@
 <?php
+require 'form.php';
 
-require 'Personnage.php';
-
-$merlin = new Personnage("Merlin");
-$harry = new Personnage("Harry");
-
-$merlin->setNom('Marlin');
-
-var_dump($merlin->getNom());
-var_dump($merlin->getAtk());
+$form =  new Form($_POST);
 ?>
 
+<form action="#" method="post">
+    <?php
+    echo $form->input('username');
+    echo $form->input('password');
+    echo $form->submit();
+    ?>
+</form>
