@@ -1,20 +1,28 @@
 <?php
 require 'form.php';
-require 'Personnage.php';
-require 'Text.php';
+require 'BootstrapForm.php';
 
-$merlin = new Personnage('Merlin');
-$merlin->regenerer();
-var_dump($merlin);
-
-$form =  new Form($_POST);
-var_dump(Text::withZero(10));
+$form =  new BootstrapForm($_POST);
 ?>
 
-<form action="#" method="post">
-    <?php
-    echo $form->input('username');
-    echo $form->input('password');
-    echo $form->submit();
-    ?>
-</form>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form action="#" method="post">
+        <?php
+        echo $form->input('username');
+        echo $form->input('password');
+        echo $form->submit();
+        ?>
+    </form>
+
+</body>
+</html>
+

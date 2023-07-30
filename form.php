@@ -10,7 +10,7 @@ class Form {
      * 
      * @var array 
      */
-    private $data;
+    protected $data;
 
     /**
      * Tag utilisé pour entourer les champs
@@ -35,7 +35,7 @@ class Form {
      * @param string $html 
      * @return string
      */
-    private function surround($html)
+    protected function surround($html)
     {
         return "<$this->surround>$html</$this->surround>";
     }
@@ -46,7 +46,7 @@ class Form {
      * @param string $index
      * @return string
      */
-    private function getValue($index)
+    protected function getValue($index)
     {
         return isset($this->data[$index]) ? $this->data[$index] : null;
     }
