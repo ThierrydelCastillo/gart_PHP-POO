@@ -2,6 +2,8 @@
 
 class Personnage {
 
+    private static $max_vie = 120;
+
     private $vie = 20;
     private $atk = 20;
     private $nom;
@@ -39,7 +41,7 @@ class Personnage {
     public function regenerer($vie = null)
     {
         if (is_null($vie)){
-            $this->vie = 100;
+            $this->vie = self::$max_vie;
         } else {
             $this->vie += $vie;
         }
