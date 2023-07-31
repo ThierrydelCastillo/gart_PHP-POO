@@ -1,4 +1,7 @@
 <?php
+use \Tutoriel\Autoloader;
+use \Tutoriel\HTML\BootstrapForm;
+
 require 'class/autoloader.php';
 Autoloader::register();
 

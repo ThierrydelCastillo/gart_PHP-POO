@@ -1,4 +1,5 @@
 <?php
+namespace Tutoriel\HTML;
 
 class BootstrapForm extends Form {
 

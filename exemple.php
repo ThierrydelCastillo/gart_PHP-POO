@@ -1,7 +1,8 @@
 <?php
+namespace Tutoriel;
 
-require 'Personnage.php';
-require 'Archer.php';
+require 'class/autoloader.php';
+Autoloader::register();
 
 $merlin = new Personnage('Merlin');
 $harry = new Personnage('Harry');
