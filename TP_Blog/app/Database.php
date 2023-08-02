@@ -1,7 +1,6 @@
 <?php
 namespace App;
 
-use App\Table\Article;
 use PDO;
 
 class Database {
@@ -29,10 +28,15 @@ class Database {
         return $this->pdo;
     }
 
-    public function query($statement, $class_name)
+    public function query($statement, $class_name, $one = false)
     {
-        $req = $this->getPDO()->query($statement);
-        $data = $req->fetchAll(PDO::FETCH_CLASS, $class_name);
+        $statement = $this->getPDO()->query($statement);
+        $statement->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        if ($one) {
+            $data = $statement->fetch();
+        } else {
+            $data = $statement->fetchAll();
+        }
         return $data;
     }
 
