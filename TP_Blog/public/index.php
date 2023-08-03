@@ -4,7 +4,6 @@ require '../app/Autoloader.php';
 App\Autoloader::register();
 
 $app = App\App::getInstance();
-$db = $app->getDb();
-$post = $app->getTable('post');
-
+$table = $app->getTable('post');
+var_dump($table->all());
 ?>
