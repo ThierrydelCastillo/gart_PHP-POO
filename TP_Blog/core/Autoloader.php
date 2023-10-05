@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace Core;
 
 class Autoloader {
 
@@ -13,5 +13,5 @@ class Autoloader {
             require __DIR__ . '\\' . $class_name . '.php';
         }
     }
-    
+
 }
