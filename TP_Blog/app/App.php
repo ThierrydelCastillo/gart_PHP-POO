@@ -1,7 +1,6 @@
 <?php
-namespace App;
-
-use App\Database\MysqlDatabase;
+use Core\Config;
+use Core\Database\MysqlDatabase;
 
 class App {
 
@@ -18,6 +17,15 @@ class App {
         return self::$_instance;
     }
 
+    public static function load()
+    {
+        session_start();
+        require ROOT . '/app/Autoloader.php';
+        App\Autoloader::register();
+        require ROOT . '/core/Autoloader.php';
+        Core\Autoloader::register();
+    }
+
     public function getTable($name)
     {
         $class_name = 'App\\Table\\' . ucfirst($name) . 'Table';
@@ -26,11 +34,15 @@ class App {
 
     public function getDb()
     {
-        $config = Config::getInstance();
+        $config = Config::getInstance(ROOT . '/config/config.php');
         if (is_null($this->db_instance)) {
             $this->db_instance = new MysqlDatabase($config->get('db_name'));
         }
         return $this->db_instance;
     }
 
+    public function notFound()
+    {
+        echo "Page non trouvée !";
+    }
 }
