@@ -36,11 +36,11 @@ class PostTable extends Table{
     }
 
     /**
-     * Récupère un article
+     * Récupère un article en liant la catégorie associée
      * @param $id int
      * @return \App\Entity\PostEntity
      */
-    public function find($id)
+    public function findWithCategory($id)
     {
         return $this->query("
         SELECT articles.id, articles.titre, articles.contenu, articles.date, categories.titre as categorie

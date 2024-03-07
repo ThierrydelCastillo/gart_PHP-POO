@@ -30,31 +30,58 @@ class MysqlDatabase extends Database{
 
     public function query($statement, $class_name = null, $one = false)
     {
-        $statement = $this->getPDO()->query($statement);
+        $req = $this->getPDO()->query($statement);
+        if(
+            strpos($statement, 'UPDATE') === 0 ||
+            strpos($statement, 'INSERT') === 0 ||
+            strpos($statement, 'DELETE') === 0
+        ) {
+            return $req;
+        }
+
         if ($class_name === null) {
-            $statement->setFetchMode(PDO::FETCH_OBJ);
+            $req->setFetchMode(PDO::FETCH_OBJ);
         } else {
-            $statement->setFetchMode(PDO::FETCH_CLASS, $class_name);
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
         }
         if ($one) {
-            $data = $statement->fetch();
+            $data = $req->fetch();
         } else {
-            $data = $statement->fetchAll();
+            $data = $req->fetchAll();
         }
         return $data;
     }
 
-    public function prepare($statement, $params, $class_name, $one = false)
+    public function prepare($statement, $params, $class_name = null, $one = false)
     {
-        $statement = $this->getPDO()->prepare($statement);
-        $statement->execute($params);
-        $statement->setFetchMode(PDO::FETCH_CLASS, $class_name);
-        if ($one) {
-            $data = $statement->fetch();
+        $req = $this->getPDO()->prepare($statement);
+        $res = $req->execute($params);
+
+        if(
+            strpos($statement, 'UPDATE') === 0 ||
+            strpos($statement, 'INSERT') === 0 ||
+            strpos($statement, 'DELETE') === 0
+        ) {
+            return $res;
+        }
+
+        if ($class_name === null) {
+            $req->setFetchMode(PDO::FETCH_OBJ);
         } else {
-            $data = $statement->fetchAll();
+            $req->setFetchMode(PDO::FETCH_CLASS, $class_name);
+        }
+
+        if ($one) {
+            $data = $req->fetch();
+        } else {
+            $data = $req->fetchAll();
         }
         return $data;
+    }
+
+    public function lastInsertId()
+    {
+        return $this->getPDO()->lastInsertId();
     }
 
 }
